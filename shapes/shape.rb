@@ -1,9 +1,15 @@
 class Shape
   attr_accessor :color
 
+# Initializes the color to nothing or red
+
   def initialize(color = nil)
     @color = color || 'Red'
   end
+
+
+# Defines a function that outputs a boolean value which compares the
+# area of one shape to the other shape.
 
   def larger_than?(other_shape)
     area > other_shape.area

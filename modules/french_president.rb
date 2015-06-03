@@ -3,16 +3,16 @@ module Presidential
   attr_accessor :name, :age, :citizenship
 
   def initialize(name, age)
-    @name, @age, @citizenship = name, age, self.class.citizenship
+    puts "self in initialize is: #{self.inspect}"
+    @name, @age, @citizenship = name, age, self.class.citizenship #instance of all country citizenship
   end
-
-
 
 end
 
 class UnitedStatesPresident
-
   include Presidential
+
+  puts "self in USP is: #{self.inspect}"
 
   def self.citizenship
     "The United States of America"
@@ -21,10 +21,10 @@ class UnitedStatesPresident
 end
 
 class FrancePresident
-
   include Presidential
 
   def name
+    # name = "im local"
     "#{@name}, #{self.catchphrase}"
   end
 
