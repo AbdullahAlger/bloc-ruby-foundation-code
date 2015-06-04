@@ -40,9 +40,10 @@ RSpec.describe AddressBook do
       book = AddressBook.new
       book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       book.add_entry('John Babaloo', '774.333.3333', 'babaloo@hero.com')
+      entry_length = book.entries.length
       book.remove_entry('John Babaloo')
 
-      expect(book.entries.size).eql? 1
+      expect(book.entries.size).to eql(entry_length - 1)
     end
   end
 end
