@@ -1,4 +1,5 @@
 require_relative "entry.rb"
+require "csv"
 
 class AddressBook
   attr_accessor :entries
@@ -25,6 +26,21 @@ class AddressBook
       end
     end
   end
+
+  def import_from_csv(file_name) # imports the file
+    csv_text = File.read(file_name) # reads the CSV file
+    csv = CSV.parse(csv_text, headers: true) # parse the file > object
+
+    csv.each do |row| #iterate over CSV object's rows
+      #row_hash = row.to_hash # create a hash for each row
+      #add_entry(row_hash["name"], row_hash["phone_number"], row_hash("email")) # convert row hash to entry using method
+      add_entry(row["name"], row["phone_number"], row["email"])
+      puts row.inspect
+    end
+    return csv.count # gets the number of items parsed from the CSV
+  end
 end
 
-
+book = AddressBook.new
+p book.import_from_csv("entries.csv")
+p book.entries

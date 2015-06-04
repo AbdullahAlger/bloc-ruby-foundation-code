@@ -1,31 +1,37 @@
 RSpec.describe AddressBook do
+
+  let(:book) {AddressBook.new}
+
+  # You can use book and AddressBook throughout the test using let from RSpec
+
+  def check_entry(entry, expected_name, expected_number, expected_email)
+    expect(entry.name).to eql expected_name
+    expect(entry.phone_number).to eql expected_number
+    expect(entry.email).to eql expected_email
+  end
+
   context "attributes" do
     it "should respond to entries" do
-      book = AddressBook.new
       expect(book).to respond_to(:entries)
     end
 
     it "should initialize entries as an array" do
-      book = AddressBook.new
       expect(book.entries).to be_a(Array)
     end
 
     it "should initialize entries as empty" do
-      book = AddressBook.new
       expect(book.entries.size).eql? 0
     end
   end
 
   context ".add_entry" do
     it "adds only one entry to the address book" do
-      book = AddressBook.new
       book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
 
       expect(book.entries.size).eql? 1
     end
 
     it "adds the correct information to entries" do
-      book = AddressBook.new
       book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       new_entry = book.entries[0]
 
@@ -37,7 +43,6 @@ RSpec.describe AddressBook do
 
   context ".remove_entry" do
     it "removes only one entry in the address book" do
-      book = AddressBook.new
       book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       book.add_entry('John Babaloo', '774.333.3333', 'babaloo@hero.com')
       entry_length = book.entries.length
@@ -46,4 +51,44 @@ RSpec.describe AddressBook do
       expect(book.entries.size).to eql(entry_length - 1)
     end
   end
+
+  context ".import_from_csv" do
+    it "imports the correct number of entries" do
+      book.import_from_csv("entries.csv")
+      book_size = book.entries.size
+
+      expect(book_size).to eql 5
+    end
+
+    it "checks the details of the first entry" do
+      book.import_from_csv("entries.csv")
+      entry_one = book.entries[0]
+      check_entry(entry_one, "Bill", "555-555-5555", "bill@blocmail.com")
+    end
+
+    it "checks the details of the second entry" do
+      book.import_from_csv("entries.csv")
+      entry_two = book.entries[1]
+      check_entry(entry_two, "Bob", "555-555-5555", "bob@blocmail.com")
+    end
+
+    it "checks the details of the third entry" do
+      book.import_from_csv("entries.csv")
+      entry_three = book.entries[2]
+      check_entry(entry_three, "Joe", "555-555-5555", "joe@blocmail.com")
+    end
+
+    it "checks the details of the fourth entry" do
+      book.import_from_csv("entries.csv")
+      entry_four = book.entries[3]
+      check_entry(entry_four, "Sally", "555-555-5555", "sally@blocmail.com")
+    end
+
+    it "checks the details of the fifth entry" do
+      book.import_from_csv("entries.csv")
+      entry_five = book.entries[4]
+      check_entry(entry_five, "Sussie", "555-555-5555", "sussie@blocmail.com")
+    end
+  end
 end
+
