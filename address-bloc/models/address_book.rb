@@ -20,7 +20,6 @@ class AddressBook
 
   def remove_entry(person)
     @entries.each do |entry|
-      puts person
       if entry.name == person
         @entries.delete(entry)
       end
