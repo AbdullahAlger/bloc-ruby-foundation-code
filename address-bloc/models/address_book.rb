@@ -27,6 +27,26 @@ class AddressBook
     end
   end
 
+  def binary_search(name)
+    lower = 0 # begin at the first part of the array
+    upper = entries.length - 1 # get the farthest end of the array (-1 because array length is 0...n)
+
+    while lower <= upper # loop until the lower part is less than or equal to the upper
+      mid = (lower + upper) / 2 # middle of the array
+      mid_name = entries[mid].name # the middle index of name
+      if name == mid_name # if name is in the middle
+        return entries[mid] # return the entry
+      elsif name < mid_name # if the name is before the middle (lower)
+        upper = mid - 1 # subtract the upper portion since it's in the lower part
+      elsif name > mid_name # if the name is after the middle (upper)
+        lower = mid + 1 # add the lower portion since it's in the upper part
+      end
+    end
+    return nil # no match found send nil
+  end
+
+  
+
   def import_from_csv(file_name) # imports the file
     csv_text = File.read(file_name) # reads the CSV file
     csv = CSV.parse(csv_text, headers: true) # parse the file > object
