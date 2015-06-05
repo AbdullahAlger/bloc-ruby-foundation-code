@@ -45,16 +45,25 @@ class AddressBook
     return nil # no match found send nil
   end
 
-  
+  def iterative_search(name)
+    index = 0
+    while index < entries.length
+      if name == entries[index].name
+        return entries[index]
+      end
+      index += 1
+    end
+    return nil
+  end
+
 
   def import_from_csv(file_name) # imports the file
     csv_text = File.read(file_name) # reads the CSV file
     csv = CSV.parse(csv_text, headers: true) # parse the file > object
-
     csv.each do |row| #iterate over CSV object's rows
-      #row_hash = row.to_hash # create a hash for each row
-      #add_entry(row_hash["name"], row_hash["phone_number"], row_hash("email")) # convert row hash to entry using method
-      add_entry(row["name"], row["phone_number"], row["email"])
+      row_hash = row.to_hash # create a hash for each row
+      add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"]) # convert row hash to entry using method
+      # add_entry(row["name"], row["phone_number"], row["email"])
     end
     return csv.count # gets the number of items parsed from the CSV
   end
