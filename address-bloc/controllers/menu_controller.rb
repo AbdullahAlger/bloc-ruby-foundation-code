@@ -228,5 +228,3 @@ class MenuController
   end
 end
 
-book = MenuController.new
-p book.address_book.entries
