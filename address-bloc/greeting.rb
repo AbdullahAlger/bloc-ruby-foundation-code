@@ -1,7 +1,8 @@
 def greeting
-
-	ARGV[1..-1].each do |arg|
-		puts "#{ARGV[0]}, #{arg}!"
+	names_array = ARGV[1..-1]
+	greet = ARGV[0]
+	names_array.each do |name|
+		puts "#{greet}, #{name}!"
 	end
 
 end
