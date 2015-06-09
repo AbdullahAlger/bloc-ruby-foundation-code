@@ -9,4 +9,8 @@ class Entry
     "Name: #{@name}\nPhone Number: #{@phone_number}\nEmail: #{@email}"
   end
 
+  def ==(other)
+     name == other.name && phone_number == other.phone_number && email == other.email
+  end
+
 end

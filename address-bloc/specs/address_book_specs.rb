@@ -1,3 +1,5 @@
+require_relative "../models/address_book"
+
 RSpec.describe AddressBook do
 
   let(:book) {AddressBook.new}
@@ -20,7 +22,7 @@ RSpec.describe AddressBook do
     end
 
     it "should initialize entries as empty" do
-      expect(book.entries.size).eql? 0
+      expect(book.entries.size).to eq 0
     end
   end
 
@@ -45,8 +47,9 @@ RSpec.describe AddressBook do
     it "removes only one entry in the address book" do
       book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       book.add_entry('John Babaloo', '774.333.3333', 'babaloo@hero.com')
+      entry = Entry.new('John Babaloo', '774.333.3333', 'babaloo@hero.com')
       entry_length = book.entries.length
-      book.remove_entry('John Babaloo')
+      book.remove_entry(entry)
 
       expect(book.entries.size).to eql(entry_length - 1)
     end

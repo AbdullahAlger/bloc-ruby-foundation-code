@@ -1,4 +1,4 @@
-require_relative "entry.rb"
+require_relative "entry"
 require "csv"
 
 class AddressBook
@@ -20,11 +20,7 @@ class AddressBook
   end
 
   def remove_entry(person)
-    @entries.each do |entry|
-      if entry.name == person
-        @entries.delete(entry)
-      end
-    end
+    @entries.delete(person)
   end
 
   def binary_search(name)
