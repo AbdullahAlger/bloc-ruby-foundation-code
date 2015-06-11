@@ -49,7 +49,7 @@ class MenuController
         exit(0)
       else
         system "clear"
-        puts "Sorry, that is not a valid input"
+        puts "Sorry, that is not a valid input Dave"
         main_menu
     end
   end
@@ -88,7 +88,7 @@ class MenuController
     if match.to_s # check if search returned a match
       search_submenu(match) # displays a list of operations can be found on an Entry
     else
-      puts "No match found for #{name}"
+      puts "No match found for #{name} Dave"
     end
   end
 
@@ -113,7 +113,7 @@ class MenuController
         main_menu
       else
         system "clear"
-        puts "#{selection} is not a valid input"
+        puts "#{selection} is not a valid input Dave"
         puts entry.to_s
         search_submenu(entry)
     end
@@ -155,13 +155,13 @@ class MenuController
 
   def delete_entry(entry)
     @address_book.entries.delete(entry)
-    puts "#{entry.name} has been deleted"
+    puts "#{entry.name} has been deleted Dave"
   end
 
   def kill_dave
     system "clear"
     entries = @address_book.entries
-    if @address_book.entries.length > 0
+    if !@address_book.entries.empty?
       print "Are you sure you want to terminate your entries Dave? (y/n) "
       response = gets.chomp
       system "clear"
@@ -176,6 +176,7 @@ class MenuController
         main_menu
       end
     else
+      puts "Sorry Dave, you have no entries"
       main_menu
     end
   end
@@ -222,7 +223,7 @@ class MenuController
         main_menu
       else
         system "clear"
-        puts "#{selection} is not a valid input"
+        puts "#{selection} is not a valid input Dave"
         entry_submenu(entry)
     end
   end
